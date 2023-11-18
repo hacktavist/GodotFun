@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuei7v02iibih"]
+
+[ext_resource type="LabelSettings" uid="uid://c634ch02uffjk" path="res://ui/main_menu_label_settings.tres" id="1_0ot3y"]
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_8ekoa"]
+
+[node name="MainMenu" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6, 0.309804, 0.0196078, 0.545098)
+script = ExtResource("1_8ekoa")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(160, 176)
+emitting = false
+amount = 200
+lifetime = 10.0
+speed_scale = 2.0
+explosiveness = 0.14
+emission_shape = 3
+emission_rect_extents = Vector2(180, 0)
+particle_flag_align_y = true
+gravity = Vector2(0, -100)
+scale_amount_max = 2.0
+color = Color(1, 0.470588, 0.0901961, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "Press Space to Begin"
+label_settings = ExtResource("1_0ot3y")
+horizontal_alignment = 1
+vertical_alignment = 1
