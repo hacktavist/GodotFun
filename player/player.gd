@@ -56,11 +56,11 @@ func jump():
 			velocity.y = jump_force
 		elif Input.is_action_just_released("ui_accept") and velocity.y < jump_force / 2:
 			velocity.y = jump_force / 2
-		elif not is_on_floor() and is_on_wall()  and Input.is_action_just_pressed("ui_left"):
+		elif not is_on_floor() and $RayRight.is_colliding()  and Input.is_action_just_pressed("ui_left"):
 
 			velocity.y = jump_force
 			velocity.x = pushback * wall_normal.x
-		elif not is_on_floor() and is_on_wall()  and Input.is_action_just_pressed("ui_right"):
+		elif not is_on_floor() and $RayLeft.is_colliding()   and Input.is_action_just_pressed("ui_right"):
 			
 			velocity.y = jump_force
 			velocity.x = pushback * wall_normal.x

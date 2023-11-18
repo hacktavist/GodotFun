@@ -141,3 +141,9 @@ libraries = {
 [node name="ExtendJumpTimer" type="Timer" parent="."]
 wait_time = 0.236
 one_shot = true
+
+[node name="RayRight" type="RayCast2D" parent="."]
+target_position = Vector2(5, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-5, 0)
