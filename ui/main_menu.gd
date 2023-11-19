@@ -1,5 +1,10 @@
 extends ColorRect
 
+@onready var cpu_particles_2d = $CPUParticles2D
+
+func _ready():
+	cpu_particles_2d.emitting = true
+	GameManager.is_player_input_disabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

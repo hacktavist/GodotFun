@@ -14,9 +14,14 @@ const DustEffectScene = preload("res://effects/dust_effect.tscn")
 @onready var sprite_2d = $Sprite2D
 @onready var extend_jump_timer = $ExtendJumpTimer
 
+func _ready():
+	set_process_input(true)
 
 func _physics_process(delta):
-	print(is_on_wall())
+	if Input.is_action_just_pressed("ui_accept"): 
+		$"/root/World".get_child(2).visible = false
+		GameManager.is_player_input_disabled = false
+	if GameManager.is_player_input_disabled == true: return
 	var input_axis = Input.get_axis("ui_left", "ui_right")
 	apply_gravity(delta)
 	move(delta, input_axis)
