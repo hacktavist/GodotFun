@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://m7d0h7m10kug"]
+
+[ext_resource type="Script" path="res://Generator.gd" id="1_w7a4h"]
+[ext_resource type="TileSet" uid="uid://ctvjx7odqcm6o" path="res://world/world_tile_map.tres" id="2_lis0a"]
+
+[node name="Generator" type="Node2D"]
+script = ExtResource("1_w7a4h")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_lis0a")
+format = 2
