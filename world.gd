@@ -1,10 +1,12 @@
 extends Node2D
 
+@onready var dialogue_box = $DialogueBox
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	dialogue_box.visible = true
+	dialogue_box.get_child(0).get_child(0).text = GameManager.villain_dialogue
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
