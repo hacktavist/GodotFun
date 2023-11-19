@@ -1,5 +1,14 @@
 extends Node
 
+################################################################################
+# TODO: create a "contacting servers" screen and disable input until we have
+#       tried every attempt to set villain_dialogue before going with default
+#       dialogue text
+################################################################################
+
+# place for character/enemy globals
+var is_player_input_disabled : bool = true
+
 # for making ai request
 var url : String = "https://api.openai.com/v1/chat/completions"
 var temperature : float = 0.5
@@ -8,6 +17,7 @@ var your_key = ""
 var headers_to_send = []
 var model : String = "gpt-3.5-turbo-16k-0613"
 var messages = []
+var body = []
 var ai_request : HTTPRequest
 
 # for api key request
@@ -49,10 +59,9 @@ func get_api_key():
 	current_retry += 1
 
 	
-################################################################
-# TODO: rate limiting error handling
+################################################################################
 # call this when level starts
-###############################################################
+################################################################################
 func dialogue_request ():
 	print("Dialogue function called")
 	var prompt = ""
@@ -68,10 +77,8 @@ func dialogue_request ():
 		"content": prompt
 		})
 	
-	#on_player_talk.emit()
-	
 	# create the request body
-	var body = JSON.stringify({
+	body = JSON.stringify({
 		"messages": messages,
 		"temperature": temperature,
 		"max_tokens": max_tokens,
@@ -85,7 +92,7 @@ func dialogue_request ():
 	if send_request != OK:
 		print("Generic Villain Dialogue in case there is a server error")
 
-# called when we have received a response from the server
+# called when we have received a response api key server
 func _on_request_completed (result, response_code, headers, body):
 	if response_code == 200:
 		var json = JSON.new()
@@ -97,15 +104,19 @@ func _on_request_completed (result, response_code, headers, body):
 	else:
 		if current_retry < max_retries:
 			retry_timer.start(retry_delay)
-		
+
+# called when we receive response from open ai
 func _on_ai_request_completed(result, response_code, headers, body):
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
-	print(response)
+	print("AI Request Completed: " + str(response))
 	if response_code == 200:
 		villain_dialogue = response["choices"][0]["message"]["content"]
+
 	print(villain_dialogue)
 
+# for handling retries to the api key server
 func _on_timer_timeout():
 	get_api_key()
+	

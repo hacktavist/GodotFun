@@ -9,7 +9,7 @@
 script = ExtResource("1_yp0n8")
 
 [node name="Player" parent="." instance=ExtResource("1_ipa0s")]
-position = Vector2(0, 64)
+position = Vector2(0, 112)
 gravity = 400
 jump_force = -200
 pushback = 75
