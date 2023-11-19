@@ -18,6 +18,9 @@ var headers_to_send = []
 var model : String = "gpt-3.5-turbo-16k-0613"
 var messages = []
 var body = []
+var openai_max_retries = 3
+var openai_retry_delay = 2
+var openai_current_retry = 0
 var ai_request : HTTPRequest
 
 # for api key request
@@ -51,12 +54,6 @@ func _ready ():
 	ai_request.connect("request_completed", _on_ai_request_completed)
 	get_api_key()
 
-	
-	
-	
-func get_api_key():
-	var _key = request.request(api_key_url)
-	current_retry += 1
 
 	
 ################################################################################
@@ -92,6 +89,14 @@ func dialogue_request ():
 	if send_request != OK:
 		print("Generic Villain Dialogue in case there is a server error")
 
+func get_api_key():
+	var _key = request.request(api_key_url)
+	current_retry += 1
+
+# for handling retries to the api key server
+func _on_timer_timeout():
+	get_api_key()
+	
 # called when we have received a response api key server
 func _on_request_completed (result, response_code, headers, body):
 	if response_code == 200:
@@ -102,7 +107,7 @@ func _on_request_completed (result, response_code, headers, body):
 		headers_to_send = ["Content-type: application/json", "Authorization: Bearer " + response.key]
 		dialogue_request()
 	else:
-		if current_retry < max_retries:
+		if current_retry <= max_retries:
 			retry_timer.start(retry_delay)
 
 # called when we receive response from open ai
@@ -113,10 +118,9 @@ func _on_ai_request_completed(result, response_code, headers, body):
 	print("AI Request Completed: " + str(response))
 	if response_code == 200:
 		villain_dialogue = response["choices"][0]["message"]["content"]
+	else:
+		if openai_max_retries <= openai_current_retry:
+			ai_request.request(url, headers_to_send, HTTPClient.METHOD_POST, body)
+			openai_current_retry += 1
 
 	print(villain_dialogue)
-
-# for handling retries to the api key server
-func _on_timer_timeout():
-	get_api_key()
-	

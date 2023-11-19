@@ -19,7 +19,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept"): 
-		$"/root/World".get_child(2).visible = false
+		$"/root/World".get_child(1).visible = false
 		GameManager.is_player_input_disabled = false
 	if GameManager.is_player_input_disabled == true: return
 	var input_axis = Input.get_axis("ui_left", "ui_right")
