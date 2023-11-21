@@ -19,6 +19,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept"): 
+
 		$"/root/World".get_child(1).visible = false # I think this will be different from the current build when I approve the villain dialgogue PR
 		GameManager.is_player_input_disabled = false
 	if GameManager.is_player_input_disabled == true: return
