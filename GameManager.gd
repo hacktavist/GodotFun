@@ -100,6 +100,17 @@ var level_completed = {
 	"complete30": "You rise, only to face deeper, more treacherous paths ahead."
 }
 
+################################################################################
+# key value pairs of level arrays
+################################################################################
+var levels = {"intro":[preload("res://world.tscn"),preload("res://test_level_2.tscn")],
+			  "level_1":[],
+			  "level_2":[],
+			  "level_3":[],
+			  "level_4":[],
+			  "level_5":[],
+			}
+
 # place for character/enemy globals
 var is_player_input_disabled : bool = true
 
@@ -139,18 +150,25 @@ var retry_timer = Timer.new() # timer to set for retries of api_key_request
 
 func _ready ():
 	get_tree().change_scene_to_file("res://ui/main_menu.tscn")
-	request = HTTPRequest.new()
-	ai_request = HTTPRequest.new()
-	add_child(request)
-	add_child(retry_timer)
-	add_child(ai_request)
-	request.connect("request_completed", _on_request_completed)
-	retry_timer.connect("timeout", _on_timer_timeout)
-	ai_request.connect("request_completed", _on_ai_request_completed)
-	get_api_key()
+#	request = HTTPRequest.new()
+#	ai_request = HTTPRequest.new()
+#	add_child(request)
+#	add_child(retry_timer)
+#	add_child(ai_request)
+#	request.connect("request_completed", _on_request_completed)
+#	retry_timer.connect("timeout", _on_timer_timeout)
+#	ai_request.connect("request_completed", _on_ai_request_completed)
+#	get_api_key()
+#	random_intro_level()
+	print("Game Manager")
 
-
-	
+################################################################################
+# randomize intro level
+################################################################################
+func random_intro_level():
+	var random_level = levels["intro"].pick_random()
+	print("random intro: "+str(random_level))
+	return random_level
 ################################################################################
 # call this when level starts
 ################################################################################

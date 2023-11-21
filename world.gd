@@ -9,13 +9,7 @@ var test = preload("res://test_level_1.tscn")
 func _ready():
 	dialogue_box.visible = true
 	dialogue_box.get_child(0).get_child(0).text = GameManager.villain_dialogue
-	#intro_level_resource = [preload("res://world.tscn")]
-	#var random_intro_level = intro_level_resource.pick_random()
-
-
-	#var intro_level = random_intro_level
-	#get_tree().change_scene_to_packed(intro_level)
-	#get_tree().change_scene_to_file("res://world.tscn")
+	print("World")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

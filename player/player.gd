@@ -15,7 +15,8 @@ const DustEffectScene = preload("res://effects/dust_effect.tscn")
 @onready var extend_jump_timer = $ExtendJumpTimer
 
 func _ready():
-	set_process_input(true)
+	print("Player")
+	
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept"): 

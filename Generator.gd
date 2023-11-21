@@ -7,7 +7,8 @@ extends Node2D
 @export var PLATFORM_CHANCE = 0.3  # Chance to place a platform tile
 
 func _ready():
-	generate_level()
+	print("Generator (getting rid of this)")
+	#generate_level()
 
 func generate_level():
 	var noise = FastNoiseLite.new()
