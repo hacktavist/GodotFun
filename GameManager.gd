@@ -103,12 +103,17 @@ var level_completed = {
 ################################################################################
 # key value pairs of level arrays
 ################################################################################
-var levels = {"intro":[preload("res://world.tscn"),preload("res://test_level_2.tscn")],
-			  "level_1":[],
-			  "level_2":[],
-			  "level_3":[],
-			  "level_4":[],
-			  "level_5":[],
+var levels = {
+				"intro":[
+							preload("res://world.tscn"),
+							preload("res://test_level_1.tscn"),
+							preload("res://test_level_2.tscn")
+						],
+				"level_1":[],
+				"level_2":[],
+				"level_3":[],
+				"level_4":[],
+				"level_5":[],
 			}
 
 # place for character/enemy globals
